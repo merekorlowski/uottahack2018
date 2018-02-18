@@ -1,0 +1,71 @@
+.board {
+    margin: 100px auto;
+    width: 700px;
+    height: 700px;
+}
+
+.row {
+    height: 75px;
+    display: table;
+}
+
+.number, .letter {
+    font-size: 16px;
+    color: #222;
+    font-weight: bold;
+}
+
+.number {
+    display: table-cell;
+    line-height: 75px;
+    width: 50px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.letter {
+    width: 75px;
+    line-height: 50px;
+    display: inline-block;
+    text-align: center;
+}
+
+.letter-row-margin {
+    margin-left: 50px;
+}
+
+.square {
+    position: relative;
+    width: 75px;
+    display: table-cell;
+}
+
+.black {
+    background-color: rgb(73, 50, 23);
+}
+
+.white {
+    background-color: rgb(138, 109, 77);
+}
+
+.piece-img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.clickable {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: transparent;
+}
