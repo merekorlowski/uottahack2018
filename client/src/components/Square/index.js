@@ -14,15 +14,9 @@ export default class Square extends Component {
         }
     }
 
-    select() {
-        this.props.piece = null;
-    }
-
     render() {
         return (
-            <div onClick={() => this.select()}>
-                {this.getPieceImg()}
-            </div>
+            <div>{this.getPieceImg()}</div>
         )
     }
 }

@@ -17,7 +17,7 @@ class Board extends Component {
         this.letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
         this.setSquares();
         this.setPieces();
-        this.prevSquare = null;
+        this.prevSquare = {};
         this.selectedPiece = null;
         this.piece = null;
     }
@@ -26,7 +26,7 @@ class Board extends Component {
         for (let i = 0; i < 8; i++) {
             this.state.squares[i] = [];
             for (let j = 0; j < 8; j++) {
-                this.state.squares[i][j] = <Square/>;
+                this.state.squares[i][j] = <Square piece={null}/>;
             }
         }
     }
@@ -57,12 +57,6 @@ class Board extends Component {
         for (let j = 0; j < 8; j++) {
             this.state.squares[6][j] = <Square piece={new Pawn('white')}/>;
         }
-
-        setTimeout(() => {
-            this.setState(() => {
-                this.state.squares[4][3] = <Square piece={new Rook('white')}/>;
-            });
-        }, 1000);
     }
 
     getSquareColour(i, j) {
@@ -77,6 +71,22 @@ class Board extends Component {
         }
     }
 
+    selectPiece(i, j, piece) {
+        if (this.selectedPiece) {
+            this.state.squares[i][j] = this.selectedPiece;
+            this.state.squares[this.prevSquare.i][this.prevSquare.j] = <Square piece={null}/>;
+            this.selectedPiece = null;
+            this.prevSquare = {};
+        } else {
+            this.selectedPiece = this.state.squares[i][j];
+            this.prevSquare = {
+                i: i,
+                j: j
+            };
+        }
+        this.forceUpdate();
+    }
+
     render() {
         return (
             <div className="board">
@@ -88,7 +98,7 @@ class Board extends Component {
                                 className={'square ' + this.getSquareColour(i, j)}
                                 key={i + ',' + j}
                             >
-                                {piece}
+                                <div className="clickable" onClick={() => this.selectPiece(i, j, piece)}>{piece}</div>
                             </div>
                         ))}
                     </div>
